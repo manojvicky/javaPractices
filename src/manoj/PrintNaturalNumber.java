@@ -3,17 +3,42 @@ package manoj;
 import java.util.Scanner;
 public class PrintNaturalNumber {
 //Sum and average of all the numbers added by user with limit
+    public static String errorText = "Invalid input! You have to enter a number";
+    public static String defaultText = "Enter the number of natural numbers you want to add";
 
-    public static int getLimitInteger(){
-    //get the limit of natural numbers added by user
+    public static int getInteger(){
         Scanner limit = new Scanner(System.in);
-        System.out.println("Enter the number of natural numbers you want to add");
+        System.out.println(defaultText);
         try {
             int number = Integer.parseInt(limit.nextLine());
             return number;
         }catch(NumberFormatException e){
-            System.out.println("Invalid input! You have to enter a number");
-            return getLimitInteger();
+            System.out.println(errorText);
+            return getInteger();
+        }
+    }
+
+    public static int getInteger(String text){
+        Scanner limit = new Scanner(System.in);
+        System.out.println(text);
+        try {
+            int number = Integer.parseInt(limit.nextLine());
+            return number;
+        }catch(NumberFormatException e){
+            System.out.println(errorText);
+            return getInteger(text);
+        }
+    }
+
+    public static int getInteger(String text, String errorMessage){
+        Scanner limit = new Scanner(System.in);
+        System.out.println(text);
+        try {
+            int number = Integer.parseInt(limit.nextLine());
+            return number;
+        }catch(NumberFormatException e){
+            System.out.println(errorMessage);
+            return getInteger(text, errorMessage);
         }
     }
 
@@ -66,8 +91,8 @@ public class PrintNaturalNumber {
             return getAllInputWithOutSum(limit);
         }
     }
-    public static void printNaturalNumber(){
-            int number = getLimitInteger();
+    public static void printSumAndAverageOfNaturalNumber(){
+            int number = getInteger();
             System.out.println("limit is "+ number);
             int sum = 0;
             double average;
@@ -84,6 +109,35 @@ public class PrintNaturalNumber {
             average = (double) sum/number;
             System.out.println("Sum of all numbers is "+ sum);
             System.out.println("Average of all numbers is "+ average);
+    }
+
+    public static void printNaturalNumber(){
+        int number = getInteger();
+        System.out.println("Natural number will be printed to "+ number);
+        for(int i = 0; i <= number ; i++){
+            System.out.println(i);
+        }
+    }
+
+    public static void printNaturalNumberInReverse(){
+        int number = getInteger();
+        System.out.println("Natural number will be printed to "+ number);
+        for(int i = number; i >= 0 ; i--){
+            System.out.println(i);
+        }
+    }
+
+    public static void printTables(){
+        int number = getInteger("Enter number of which table you want to print");
+        for(int i = 1; i <= 10 ; i++){
+            System.out.println(number+" x "+i + " = "+ number*i);
+        }
+    }
+    public static void printReverseTables(){
+        int number = getInteger("Enter number of which table you want to print");
+        for(int i = 10; i >= 1 ; i--){
+            System.out.println(number+" x "+i + " = "+ number*i);
+        }
     }
 }
 
